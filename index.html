@@ -3,13 +3,11 @@
 <head>
 <!--
   ============================================================================
-  دعوة زفاف أبرام ودنيا — قائمة الإعدادات التي يجب تعديلها قبل النشر
+  دعوة زفاف عياد ومادونا — قائمة الإعدادات التي يجب تعديلها قبل النشر
   ============================================================================
   ١) رابط الموقع (الدومين):
      - ابحث عن "REPLACE-WITH-YOUR-DOMAIN" في وسوم <meta property="og:*">
        و <meta name="twitter:*"> أسفل هذا التعليق (سطور ~35-45).
-     - وأيضاً في كائن CONFIG داخل الجافاسكريبت (siteUrl) قرب نهاية الملف،
-       فهو يُستخدم في زر "مشاركة الدعوة".
 
   ٢) صورة المعاينة عند المشاركة (Open Graph):
      - أضف ملف الصورة بنفسك في: imgs/og-image.jpg
@@ -36,13 +34,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#f8f1de">
-<title>دعوة زفاف أبرام ودنيا</title>
-<meta name="description" content="يسعدنا دعوتكم لمشاركتنا فرحتنا يوم السبت ١٩ سبتمبر ٢٠٢٦">
+<title>دعوة زفاف عياد ومادونا</title>
+<meta name="description" content="يسعدنا دعوتكم لمشاركتنا فرحتنا يوم السبت ٣ أكتوبر ٢٠٢٦">
 
 <!-- Open Graph (WhatsApp/Facebook preview) -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="دعوة زفاف أبرام ودنيا">
-<meta property="og:description" content="يسعدنا دعوتكم لمشاركتنا فرحتنا يوم السبت ١٩ سبتمبر ٢٠٢٦">
+<meta property="og:title" content="دعوة زفاف عياد ومادونا">
+<meta property="og:description" content="يسعدنا دعوتكم لمشاركتنا فرحتنا يوم السبت ٣ أكتوبر ٢٠٢٦">
 <!-- TODO: استبدل هذا بدومينك الفعلي بعد النشر على Vercel -->
 <meta property="og:url" content="https://REPLACE-WITH-YOUR-DOMAIN.vercel.app/">
 <!-- TODO: أضف ملف الصورة بنفسك في imgs/og-image.jpg بمقاس 1200×630 -->
@@ -53,8 +51,8 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="دعوة زفاف أبرام ودنيا">
-<meta name="twitter:description" content="يسعدنا دعوتكم لمشاركتنا فرحتنا يوم السبت ١٩ سبتمبر ٢٠٢٦">
+<meta name="twitter:title" content="دعوة زفاف عياد ومادونا">
+<meta name="twitter:description" content="يسعدنا دعوتكم لمشاركتنا فرحتنا يوم السبت ٣ أكتوبر ٢٠٢٦">
 <meta name="twitter:image" content="https://REPLACE-WITH-YOUR-DOMAIN.vercel.app/imgs/og-image.jpg">
 
 <!-- أيقونة مُضمّنة (قوس ذهبي بسيط) حتى لا تحتاج ملف favicon خارجي -->
@@ -93,11 +91,11 @@
     font-family:'Tajawal', sans-serif;
     line-height:1.7;
     overflow-x:hidden;
-    /* نسيج خلفية خفيف يشبه ورق مطبوع بذهب (زخرفة قبطية بسيطة متكررة) */
-    background-image:
-      radial-gradient(circle at 50% 0%, rgba(169,130,47,0.06), transparent 60%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%23a9822f' stroke-width='1' opacity='0.16'%3E%3Cpath d='M30 6 V54 M6 30 H54'/%3E%3Ccircle cx='30' cy='30' r='16'/%3E%3C/g%3E%3C/svg%3E");
-    background-size:auto, 60px 60px;
+    background-image:url('imgs/bg.png');
+    background-size:cover;
+    background-position:center top;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
   }
 
   body.no-scroll{ overflow:hidden; height:100vh; }
@@ -148,7 +146,8 @@
     gap:28px;
     text-align:center;
     background:
-      radial-gradient(circle at 50% 30%, var(--bg) 0%, var(--bg-panel) 70%);
+      linear-gradient(rgba(248,241,222,0.55), rgba(248,241,222,0.62)),
+      url('imgs/bg.png') center/cover no-repeat;
     padding:24px;
     transition:opacity .9s ease, visibility .9s ease;
   }
@@ -195,11 +194,6 @@
   }
   .btn:hover{ background:rgba(169,130,47,0.14); }
   .btn:active{ background:rgba(169,130,47,0.22); }
-  .btn.btn-outline{
-    border-color:var(--wine);
-    color:var(--wine);
-  }
-  .btn.btn-outline:hover{ background:rgba(110,31,43,0.08); }
 
   .btn:focus-visible,
   a:focus-visible,
@@ -238,19 +232,41 @@
   /* إطار قوسي بحدّين رفيعين من الذهب (خط خارجي وخط داخلي بفاصل صغير)،
      تقنية box-shadow المزدوج تحافظ على شكل القوس البيضاوي للزوايا العلوية */
   .arch-frame{
+    position:relative;
+    isolation:isolate;
     margin:0 auto;
     width:min(300px, 78vw);
     padding:56px 20px 32px;
     border:1px solid var(--gold);
     border-radius:50% 50% 6px 6px / 120px 120px 6px 6px;
-    background:var(--bg-panel);
+    background:url('imgs/couple.jpeg') center/cover no-repeat;
     box-shadow:
       0 0 0 5px var(--bg),
       0 0 0 6px var(--gold);
   }
+  /* طبقة شفافة فوق الصورة حتى تبقى الأسماء واضحة */
+  .arch-frame::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    background:linear-gradient(
+      180deg,
+      rgba(248,241,222,0.62) 0%,
+      rgba(248,241,222,0.38) 42%,
+      rgba(248,241,222,0.68) 100%
+    );
+    z-index:0;
+    pointer-events:none;
+  }
+  .arch-frame > *{
+    position:relative;
+    z-index:1;
+  }
   .arch-frame .names{
     font-size:clamp(1.8rem, 8vw, 2.6rem);
     color:var(--navy);
+    text-shadow:0 1px 8px rgba(248,241,222,0.85);
   }
   .arch-frame .amp{
     display:block;
@@ -352,6 +368,7 @@
     display:flex;
     flex-direction:column;
     gap:24px;
+    align-items:stretch;
   }
   /* بطاقات بحدّ ذهبي مزدوج رفيع بدل الشريط الملوّن السميك السابق —
      نفس تقنية box-shadow المستخدمة في إطار القوس */
@@ -365,6 +382,10 @@
       0 0 0 4px var(--bg),
       0 0 0 5px var(--gold);
     position:relative;
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+    min-height:100%;
   }
   .card .card-ornament{
     display:block;
@@ -373,28 +394,25 @@
     font-size:.9rem;
     margin-bottom:10px;
   }
-  .card.reception .card-ornament{
-    color:#8a6d0e;
-  }
   .card h3{
     font-size:1.35rem;
     color:var(--wine);
     margin-bottom:4px;
   }
-  .card.reception h3{
-    color:#8a6d0e;
-  }
   .card .venue{
     font-weight:500;
-    margin-bottom:2px;
+    margin:0 0 2px;
+    min-height:3.2em;
+    line-height:1.5;
   }
   .card .time{
     color:var(--muted);
-    margin-bottom:18px;
+    margin:0 0 18px;
     font-size:.95rem;
   }
   .card .btn{
     width:100%;
+    margin-top:auto;
   }
 
   /* ===== قسم الختام ===== */
@@ -412,28 +430,6 @@
     flex-direction:column;
     gap:14px;
     align-items:center;
-  }
-  #toast{
-    position:fixed;
-    bottom:24px;
-    left:50%;
-    transform:translateX(-50%) translateY(20px);
-    background:var(--navy-deep);
-    color:var(--bg);
-    border:1px solid var(--gold);
-    padding:12px 20px;
-    border-radius:4px;
-    font-size:.9rem;
-    box-shadow:0 4px 16px rgba(0,0,0,.25);
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .3s ease, transform .3s ease;
-    z-index:200;
-    white-space:nowrap;
-  }
-  #toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
   }
 
   footer{
@@ -471,8 +467,14 @@
   }
 
   @media (min-width:600px){
-    .schedule-cards{ flex-direction:row; }
-    .card{ flex:1; }
+    .schedule-cards{
+      flex-direction:row;
+      align-items:stretch;
+    }
+    .card{
+      flex:1 1 0;
+      width:0;
+    }
   }
 
   /* ===== سطر شرف الأهل (يظهر أعلى القوس، قبل اسمي العروسين) ===== */
@@ -522,9 +524,9 @@
 <!-- ===== شاشة الفتح ===== -->
 <div id="splash">
   <div class="names font-display">
-    أبرام
+    عياد
     <span class="amp">و</span>
-    دنيا
+    مادونا
   </div>
   <p class="sub"> دعوة زفاف</p>
   <button id="open-invite" class="btn">افتح الدعوة</button>
@@ -544,23 +546,25 @@
           <p class="parents-honor">يتشرف</p>
           <div class="parents-row">
             <div class="parent-col">
-              <p class="parent-name">المهندس يسري عطاللة</p>
+              <p class="parent-name">المعلم</p>
+              <p class="child-name">جرجس عياد</p>
             </div>
             <div class="parents-divider" aria-hidden="true"></div>
             <div class="parent-col">
-              <p class="parent-name">الأستاذ إبراهيم سمير</p>
+              <p class="parent-name">الأستاذ</p>
+              <p class="child-name">فواد معوض</p>
             </div>
           </div>
         </div>
         <div class="names font-display">
-          أبرام
+          عياد
           <span class="amp">&</span>
-          دنيا
+          مادونا
         </div>
       </div>
       <p class="hero-date reveal">
         يتشرفان بدعوتكم لحضور حفل زفافهما
-        <strong>السبت ١٩ سبتمبر ٢٠٢٦</strong>
+        <strong>السبت ٣ أكتوبر ٢٠٢٦</strong>
       </p>
     </div>
   </section>
@@ -618,7 +622,7 @@
           <h3>مراسم الإكليل</h3>
           <p class="venue">كنيسة السيدة العذراء مريم — الزيتون، القاهرة</p>
           <!-- TODO: وقت الكنيسة — عدّل النص التالي عند تأكيد الموعد -->
-          <p class="time">الساعة 6:00 مساءً </p>
+          <p class="time">الساعة 7:00 مساءً </p>
           <a class="btn" href="https://www.google.com/maps?cid=14922469318070160709" target="_blank" rel="noopener noreferrer">
             فتح في الخرائط
           </a>
@@ -626,10 +630,10 @@
         <div class="card reception reveal">
           <span class="card-ornament" aria-hidden="true">❖</span>
           <h3>حفل الاستقبال</h3>
-          <p class="venue">قاعة السرايا — حديقة عمر مكرم</p>
+          <p class="venue">قاعة لافيدا دار المركبات</p>
           <!-- TODO: وقت الاستقبال — عدّل النص التالي عند تأكيد الموعد -->
           <p class="time">الساعة 8:00 مساءً </p>
-          <a class="btn" href="https://maps.google.com/?q=30.109341,31.294167" target="_blank" rel="noopener noreferrer">
+          <a class="btn" href="https://maps.app.goo.gl/BQQjNLeVNAHEBfoQ6" target="_blank" rel="noopener noreferrer">
             فتح في الخرائط
           </a>
         </div>
@@ -645,14 +649,11 @@
 
       <div class="closing-actions reveal">
         <button id="add-calendar" class="btn">أضف إلى التقويم</button>
-        <button id="share-invite" class="btn btn-outline">مشاركة الدعوة</button>
       </div>
     </div>
   </section>
 
 </main>
-
-<div id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function(){
@@ -662,16 +663,14 @@
      CONFIG — كل القيم التي قد تحتاج لتعديلها موجودة هنا
      ========================================================== */
   var CONFIG = {
-    weddingDate: '2026-09-19',        // تاريخ الزفاف (YYYY-MM-DD) — السبت ١٩ سبتمبر ٢٠٢٦
-    ceremonyTime: '18:00',            // TODO: وقت الكنيسة الفعلي (صيغة 24 ساعة) — قيمة مؤقتة حالياً
+    weddingDate: '2026-10-03',        // تاريخ الزفاف (YYYY-MM-DD) — السبت ٣ أكتوبر ٢٠٢٦
+    ceremonyTime: '19:00',            // وقت الكنيسة (صيغة 24 ساعة)
     ceremonyDurationHours: 2,         // مدة مراسم الإكليل التقريبية (تُستخدم في "أضف إلى التقويم")
     receptionTime: '20:00',           // TODO: وقت الاستقبال الفعلي (صيغة 24 ساعة) — قيمة مؤقتة حالياً
     ceremonyVenue: 'كنيسة السيدة العذراء مريم — الزيتون، القاهرة',
-    receptionVenue: 'قاعة السرايا — حديقة عمر مكرم',
+    receptionVenue: 'قاعة لافيدا دار المركبات',
     ceremonyMapLink: 'https://www.google.com/maps?cid=14922469318070160709',
-    receptionMapLink: 'https://maps.google.com/?q=30.109341,31.294167',
-    // TODO: استبدل هذا برابط موقعك الفعلي بعد النشر على Vercel
-    siteUrl: 'https://REPLACE-WITH-YOUR-DOMAIN.vercel.app/'
+    receptionMapLink: 'https://maps.app.goo.gl/BQQjNLeVNAHEBfoQ6'
   };
 
   /* ---------- تحويل الأرقام إلى الأرقام الهندية العربية ---------- */
@@ -794,7 +793,7 @@
       '\nيليها حفل الاستقبال في: ' + CONFIG.receptionVenue;
     var params = new URLSearchParams({
       action: 'TEMPLATE',
-      text: 'حفل زفاف أبرام ودنيا',
+      text: 'حفل زفاف عياد ومادونا',
       dates: formatForGoogleCalendar(start) + '/' + formatForGoogleCalendar(end),
       details: details,
       location: CONFIG.ceremonyVenue,
@@ -802,35 +801,6 @@
       ctz: 'Africa/Cairo'
     });
     window.open('https://www.google.com/calendar/render?' + params.toString(), '_blank', 'noopener,noreferrer');
-  });
-
-  /* ---------- مشاركة الدعوة ---------- */
-  var toast = document.getElementById('toast');
-  var toastTimer = null;
-  function showToast(message){
-    toast.textContent = message;
-    toast.classList.add('show');
-    if (toastTimer) clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2500);
-  }
-
-  document.getElementById('share-invite').addEventListener('click', function(){
-    var shareData = {
-      title: 'دعوة زفاف أبرام ودنيا',
-      text: 'يسعدنا دعوتكم لمشاركتنا فرحتنا يوم السبت ١٩ سبتمبر ٢٠٢٦',
-      url: CONFIG.siteUrl
-    };
-    if (navigator.share){
-      navigator.share(shareData).catch(function(){ /* المستخدم ألغى المشاركة */ });
-    } else if (navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(CONFIG.siteUrl).then(function(){
-        showToast('تم نسخ رابط الدعوة');
-      }).catch(function(){
-        showToast('الرابط: ' + CONFIG.siteUrl);
-      });
-    } else {
-      showToast('الرابط: ' + CONFIG.siteUrl);
-    }
   });
 
 })();

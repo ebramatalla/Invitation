@@ -1,7 +1,9 @@
-# دعوة زفاف أبرام ودنيا — Digital Wedding Invitation
+# دعوة زفاف أبرام ودنيا — نسخة الكنيسة فقط
 
-Single-page, static, RTL Arabic wedding invitation. Plain HTML/CSS/JS — no
-framework, no build step, no backend, no localStorage.
+Church-ceremony-only variant of the wedding invitation. Same page/design as
+the full invite, but with the reception section removed — for guests invited
+to the church ceremony only. Plain HTML/CSS/JS, no framework, no build step,
+no backend, no localStorage.
 
 ## Files
 
@@ -12,69 +14,55 @@ imgs/README.txt   Notes on the two asset files you need to add
 
 ## Files you need to add yourself
 
-Nothing pulls images from the internet — these are referenced by path but
-**not included**. The site works fine without them (see below), but add them
-before sharing the link widely:
-
 | File               | Purpose                                              | Required? |
 |--------------------|-------------------------------------------------------|-----------|
 | `imgs/og-image.jpg`| 1200×630 image shown when the link is shared (WhatsApp, Facebook, Twitter previews) | Recommended |
-| `imgs/sound.mp3`   | Background music, starts after "افتح الدعوة" is tapped | Optional — if missing, the floating music button auto-hides and nothing breaks |
+| `imgs/sound.mp3`   | Background music, starts after "افتح الدعوة" is tapped | Optional — auto-hides the music button if missing |
+
+`imgs/sound.mp3` was copied over from the main invite project, so it should
+already work. Replace it if you want different music for this variant.
+
+## What's different from the full invite
+
+- The "برنامج اليوم" schedule section now shows only the ceremony card
+  (church venue, time, map link) — the reception card was removed.
+- `CONFIG` in the `<script>` block no longer has `receptionTime`,
+  `receptionVenue`, or `receptionMapLink` — only ceremony fields remain.
+- The "أضف إلى التقويم" (add to calendar) button only references the
+  ceremony — it no longer mentions the reception in the event details.
+- Page `<title>` is "دعوة زفاف أبرام ودنيا — مراسم الإكليل" to distinguish
+  it from the full invite when both are open in tabs/bookmarks.
+
+Everything else (splash screen, hero with parents' names, verse, countdown,
+share button, design) is identical to the main invite.
 
 ## Values you need to edit before publishing
 
-All of these are marked with `TODO` comments in `index.html`:
+Same as the main invite — all marked with `TODO` comments in `index.html`:
 
-1. **Domain / site URL** — appears in three places:
-   - `<meta property="og:url">` and `<meta property="og:image">` (head)
-   - `<meta name="twitter:image">` (head)
-   - `CONFIG.siteUrl` in the `<script>` at the bottom (used by the share button)
-
-   Replace `https://REPLACE-WITH-YOUR-DOMAIN.vercel.app/` with your real
-   Vercel URL once you know it (or your custom domain).
-
-2. **Ceremony & reception times** — currently placeholders (`18:00` /
-   `20:00`). Edit `CONFIG.ceremonyTime` and `CONFIG.receptionTime` in the
-   `<script>` block, and update the matching visible text in the schedule
-   cards (search for `TODO: وقت الكنيسة` and `TODO: وقت الاستقبال` in the
-   HTML). The countdown and the "Add to calendar" button both read from
-   `CONFIG`, so updating it there keeps everything in sync.
-
-3. **Map links** — already filled in with the links you provided
-   (`CONFIG.ceremonyMapLink`, `CONFIG.receptionMapLink`); only touch these if
-   a venue changes.
+1. **Domain / site URL** — in the `og:url`, `og:image`, `twitter:image` meta
+   tags and in `CONFIG.siteUrl` (used by the share button).
+2. **Ceremony time** — `CONFIG.ceremonyTime` in the `<script>` block, and the
+   matching visible text in the schedule card (search for
+   `TODO: وقت الكنيسة`).
+3. **Map link** — `CONFIG.ceremonyMapLink`, already filled in; only touch if
+   the venue changes.
 
 ## Deploying to Vercel
 
-No build step is needed — this is a static site.
+Same as the main invite — no build step needed.
 
-**Option A — Vercel dashboard**
-1. Push this folder to a GitHub/GitLab/Bitbucket repo (or use Vercel's
-   "drag and drop" deploy at https://vercel.com/new).
-2. Import the repo in Vercel.
-3. Framework preset: choose **Other** (or leave auto-detected as static).
-   Build command and output directory can stay empty/default — Vercel serves
-   `index.html` as-is.
-4. Deploy. Vercel gives you a `*.vercel.app` URL.
-5. Go back into `index.html` and replace `REPLACE-WITH-YOUR-DOMAIN` with
-   that URL (or your custom domain), then redeploy.
+**Vercel dashboard**: push this folder to a Git repo, import it in Vercel,
+framework preset "Other" (static), deploy, then go back and replace
+`REPLACE-WITH-YOUR-DOMAIN` with the real URL you get.
 
-**Option B — Vercel CLI**
+**Vercel CLI**:
 ```bash
 npm i -g vercel
 vercel        # first deploy, follow the prompts
 vercel --prod # promote to production
 ```
 
-## Notes on how it behaves
-
-- **Audio autoplay**: browsers block audio until a user gesture. Music only
-  starts after the visitor taps "افتح الدعوة" on the opening screen, which
-  satisfies that requirement.
-- **Missing `sound.mp3`**: the `<audio>` element's `error` event hides the
-  floating music button entirely, so no broken UI is shown.
-- **Reduced motion**: scroll fade-ins are skipped (content shows immediately)
-  when the visitor's OS has "reduce motion" enabled.
-- **Share button**: uses `navigator.share` on supporting mobile browsers;
-  falls back to copying the link to the clipboard (with a small toast) on
-  desktop browsers that don't support the Web Share API.
+This is a separate project from the main invite — deploy it under its own
+Vercel project (its own domain/URL) so the two links stay distinct for the
+two different guest lists.
